@@ -31,6 +31,12 @@ public class Asztal {
         }
     }
 
+    public void logLapokKezben() {
+        for (Jatekos jatekos : jatekosok) {
+            logger.info("{}: {}", jatekos, jatekos.getLapok());
+        }
+    }
+
     public Pakli getPakli() {
         return pakli;
     }
@@ -44,6 +50,7 @@ public class Asztal {
      */
     public synchronized Jatekos rak(Jatekos jatekos, Lap lap) {
         logger.debug("{} rak {}", jatekos, lap);
+        jatekos.elvesz(lap);
 
         if (utes.size() == 0) {
             hivottLap = lap;
@@ -57,7 +64,7 @@ public class Asztal {
 
         if (utes.size() == 4) {
             logger.info("utest vitte {} ({})", utestViszi.getNev(), utes);
-            utestViszi.kap(utes);
+            utestViszi.elvisz(utes);
             utes.clear();
             return utestViszi;
         } else {

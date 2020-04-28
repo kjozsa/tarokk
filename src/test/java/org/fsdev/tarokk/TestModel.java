@@ -7,7 +7,9 @@ import org.fsdev.tarokk.model.Pakli;
 import org.fsdev.tarokk.model.Szin;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.fsdev.tarokk.model.Figura.Asz;
 import static org.fsdev.tarokk.model.Figura.Bunkos;
@@ -70,18 +72,23 @@ public class TestModel {
         assertEquals(6, asztal.getPakli().getLapok().size());
         assertEquals(9, kristof.getLapok().size());
 
-        Jatekos kovetkezo = kristof;
+        asztal.logLapokKezben();
+        Jatekos aktualisJatekos = kristof;
         for (int i = 0; i < 9; i++) {
+
             for (int j = 0; j < 4; j++) {
                 Lap hivottLap = asztal.getHivottLap();
                 Szin hivottSzin = hivottLap == null ? null : hivottLap.szin;
-                kovetkezo.kirakhatoLapok(hivottSzin);
 
-                Lap lap = kovetkezo.getLapok().remove(0);
-                kovetkezo = asztal.rak(kovetkezo, lap);
+                ArrayList<Lap> kirakhatoLapok = new ArrayList<>(aktualisJatekos.kirakhatoLapok(hivottSzin));
+                Collections.shuffle(kirakhatoLapok);
+                Lap lap = kirakhatoLapok.get(0);
+
+                aktualisJatekos = asztal.rak(aktualisJatekos, lap);
             }
         }
 
-        assertEquals(36, kristof.getLapok().size() + hoba.getLapok().size() + attila.getLapok().size() + vinczeg.getLapok().size());
+        assertEquals(0, kristof.getLapok().size() + hoba.getLapok().size() + attila.getLapok().size() + vinczeg.getLapok().size());
+        assertEquals(36, kristof.getElvitt().size() + hoba.getElvitt().size() + attila.getElvitt().size() + vinczeg.getElvitt().size());
     }
 }
