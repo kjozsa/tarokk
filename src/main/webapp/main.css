@@ -1,0 +1,41 @@
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.centered {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.hand-container {
+    display: flex;
+    width: 500px;
+}
+
+.card-container {
+    flex: 1 0 0;
+    overflow-x: hidden;
+}
+
+.card-container:last-child {
+    flex: 0 0 auto;
+}
+
+.card {
+    background: white;
+    width: 80px;
+    height: 200px;
+}
