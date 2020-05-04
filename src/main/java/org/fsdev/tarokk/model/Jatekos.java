@@ -70,4 +70,8 @@ public class Jatekos {
     public String getRovidNev() {
         return nev.substring(0, 1);
     }
+
+    public int elvittLapokErteke() {
+        return elvitt.stream().mapToInt(lap -> lap.figura.getPontertek()).sum();
+    }
 }

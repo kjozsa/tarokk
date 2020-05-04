@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.fsdev.tarokk.model.Figura.Asz;
 import static org.fsdev.tarokk.model.Figura.Bunkos;
@@ -66,7 +67,8 @@ public class TestModel {
         Jatekos vinczeg = new Jatekos("Vinczeg");
         Jatekos attila = new Jatekos("Attila");
 
-        Asztal asztal = new Asztal(Arrays.asList(kristof, hoba, vinczeg, attila));
+        List<Jatekos> jatekosok = Arrays.asList(kristof, hoba, vinczeg, attila);
+        Asztal asztal = new Asztal(jatekosok);
         asztal.ujOsztas();
 
         assertEquals(6, asztal.getPakli().getLapok().size());
@@ -75,7 +77,6 @@ public class TestModel {
         asztal.logLapokKezben();
         Jatekos aktualisJatekos = kristof;
         for (int i = 0; i < 9; i++) {
-
             for (int j = 0; j < 4; j++) {
                 Lap hivottLap = asztal.getHivottLap();
                 Szin hivottSzin = hivottLap == null ? null : hivottLap.szin;
@@ -90,5 +91,9 @@ public class TestModel {
 
         assertEquals(0, kristof.getLapok().size() + hoba.getLapok().size() + attila.getLapok().size() + vinczeg.getLapok().size());
         assertEquals(36, kristof.getElvitt().size() + hoba.getElvitt().size() + attila.getElvitt().size() + vinczeg.getElvitt().size());
+
+        for (Jatekos jatekos : jatekosok) {
+            System.out.println(jatekos.getNev() + ": " + jatekos.elvittLapokErteke());
+        }
     }
 }
