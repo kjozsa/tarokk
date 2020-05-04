@@ -1,0 +1,50 @@
+var app = new Vue({
+    el: '#app',
+    data: {
+        next_player: "Kristóf",
+        top_hand: [
+            "tarokk01",
+            "tarokk02",
+            "tarokk03",
+            "tarokk04",
+            "tarokk05",
+            "tarokk06",
+            "tarokk07",
+            "tarokk08",
+            "tarokk09",
+        ],
+        left_hand: [
+            "tarokk01",
+            "tarokk02",
+            "tarokk03",
+            "tarokk04",
+            "tarokk05",
+            "tarokk06",
+            "tarokk07",
+            "tarokk08",
+            "tarokk09",
+        ],
+        bottom_hand: [
+            "tarokk11",
+            "tarokk12",
+            "tarokk13",
+            "tarokk14",
+            "tarokk15",
+            "tarokk16",
+            "tarokk17",
+            "tarokk18",
+            "tarokk21",
+        ],
+        right_hand: [
+            "tarokk01",
+            "tarokk02",
+            "tarokk03",
+            "tarokk04",
+            "tarokk05",
+            "tarokk06",
+            "tarokk07",
+            "tarokk08",
+            "tarokk09",
+        ]
+    }
+})

@@ -11,76 +11,62 @@
 </head>
 
 <body>
-
+<div id="app">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="#"><b>{{next_player}}</b> következik</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
+<!--                <li class="nav-item active">-->
+<!--                    <a class="nav-link" href="#">Home-->
+<!--                        <span class="sr-only">(current)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">About</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">Services</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">Contact</a>-->
+<!--                </li>-->
             </ul>
         </div>
     </div>
 </nav>
 
-<div id="left-hand" class="absolute-wrapper; rotate90" style="position: fixed; left:10%; top:40%">
-    <div class="hand-container">
-        <div class="card-container"><div class="card"><img src="gfx/tarokk01.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk02.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk03.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk04.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk05.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk06.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk07.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk08.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk22.png" width="75%;"></div></div>
+<div id="top-hand" class="absolute-wrapper" style="position: fixed; left:40%; top:8%">
+    <div class="container">
+        <div class="hand-container">
+            <div class="card-container" v-for="card in top_hand"><div class="card"><img :src="`gfx/${card}.png`" width="75%;"></div></div>
+        </div>
     </div>
 </div>
 
-<div id="bottom-hand" class="absolute-wrapper" style="position: fixed; left:40%; top:75%">
+<div id="left-hand" class="absolute-wrapper; rotate90" style="position: fixed; left:10%; top:40%">
+    <div class="hand-container">
+        <div class="hand-container">
+            <div class="card-container" v-for="card in left_hand"><div class="card"><img :src="`gfx/${card}.png`" width="75%;"></div></div>
+        </div>
+    </div>
+</div>
+
+<div id="bottom-hand" class="absolute-wrapper" style="position: fixed; left:40%; bottom:2%">
     <div class="container">
         <div class="hand-container">
-            <div class="card-container"><div class="card"><img src="gfx/tarokk11.png" width="75%;"></div></div>
-            <div class="card-container"><div class="card"><img src="gfx/tarokk12.png" width="75%;"></div></div>
-            <div class="card-container"><div class="card"><img src="gfx/tarokk13.png" width="75%;"></div></div>
-            <div class="card-container"><div class="card"><img src="gfx/tarokk14.png" width="75%;"></div></div>
-            <div class="card-container"><div class="card"><img src="gfx/tarokk15.png" width="75%;"></div></div>
-            <div class="card-container"><div class="card"><img src="gfx/tarokk16.png" width="75%;"></div></div>
-            <div class="card-container"><div class="card"><img src="gfx/tarokk17.png" width="75%;"></div></div>
-            <div class="card-container"><div class="card"><img src="gfx/tarokk18.png" width="75%;"></div></div>
-            <div class="card-container"><div class="card"><img src="gfx/tarokk21.png" width="75%;"></div></div>
+            <div class="card-container" v-for="card in bottom_hand"><div class="card"><img :src="`gfx/${card}.png`" width="90%;"></div></div>
         </div>
     </div>
 </div>
 
 <div id="right-hand" class="absolute-wrapper; rotate270" style="position: fixed; right:10%; top:40%">
     <div class="hand-container">
-        <div class="card-container"><div class="card"><img src="gfx/tarokk11.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk12.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk13.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk14.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk15.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk16.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk17.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk18.png" width="75%;"></div></div>
-        <div class="card-container"><div class="card"><img src="gfx/tarokk21.png" width="75%;"></div></div>
+        <div class="card-container" v-for="card in right_hand"><div class="card"><img :src="`gfx/${card}.png`" width="75%;"></div></div>
     </div>
 </div>
 
@@ -90,10 +76,11 @@
         </div>
     </div>
 </div>
+</div>
 
-<!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.slim.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
