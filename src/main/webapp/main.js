@@ -1,18 +1,28 @@
-var app = new Vue({
+let stompClient = null;
+
+const app = new Vue({
     el: '#app',
+    methods: {
+        kihiv: function (kartya) {
+            if (this.stompClient && this.stompClient.connected) {
+                console.log("sending " + JSON.stringify(kartya));
+                this.stompClient.send("/app/kihiv", {}, JSON.stringify(kartya));
+            }
+        }
+    },
     mounted: function () {
         this.$nextTick(function () {
             let socket = new SockJS('/ws');
-            let stompClient = Stomp.over(socket);
-            stompClient.connect({}, function (frame) {
+            this.stompClient = Stomp.over(socket);
+            this.stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
 
-                stompClient.subscribe('/game/asztal', function (val) {
+                this.stompClient.subscribe('/game/asztal', function (val) {
                     console.log(val);
                     console.log(JSON.parse(val.body));
                     vm.list1 = JSON.parse(val.body);
                 });
-                stompClient.subscribe('/game/tick', function (val) {
+                this.stompClient.subscribe('/game/tick', function (val) {
                     console.log(val);
                 });
             });
@@ -68,4 +78,4 @@ var app = new Vue({
             "tarokk09",
         ]
     }
-})
+});

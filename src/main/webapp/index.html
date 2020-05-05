@@ -12,80 +12,90 @@
 
 <body>
 <div id="app">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="#"><b>{{kovetkezo}}</b> következik</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-<!--                <li class="nav-item active">-->
-<!--                    <a class="nav-link" href="#">Home-->
-<!--                        <span class="sr-only">(current)</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#">About</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#">Services</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#">Contact</a>-->
-<!--                </li>-->
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><b>{{kovetkezo}}</b> következik</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <!--                <li class="nav-item active">-->
+                    <!--                    <a class="nav-link" href="#">Home-->
+                    <!--                        <span class="sr-only">(current)</span>-->
+                    <!--                    </a>-->
+                    <!--                </li>-->
+                    <!--                <li class="nav-item">-->
+                    <!--                    <a class="nav-link" href="#">About</a>-->
+                    <!--                </li>-->
+                    <!--                <li class="nav-item">-->
+                    <!--                    <a class="nav-link" href="#">Services</a>-->
+                    <!--                </li>-->
+                    <!--                <li class="nav-item">-->
+                    <!--                    <a class="nav-link" href="#">Contact</a>-->
+                    <!--                </li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="top-hand" class="absolute-wrapper" style="position: fixed; left:40%; top:8%">
+        <p style="alignment: center" style="margin-bottom: 0px"><b>A</b>ttila</p>
+        <div class="container">
+            <div class="hand-container">
+                <div class="card-container" v-for="kartya in felso_kez">
+                    <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
 
-<div id="top-hand" class="absolute-wrapper" style="position: fixed; left:40%; top:8%">
-    <p align="center" style="margin-bottom: 0px"><b>A</b>ttila</p>
-    <div class="container">
+    <div id="left-hand" class="absolute-wrapper; rotate90" style="position: fixed; left:10%; top:40%">
         <div class="hand-container">
-            <div class="card-container" v-for="kartya in felso_kez"><div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div></div>
+            <div class="hand-container">
+                <div class="card-container" v-for="kartya in bal_kez">
+                    <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>
+                </div>
+            </div>
         </div>
+        <p style="alignment: center"><b>H</b>oba</p>
     </div>
-</div>
 
-<div id="left-hand" class="absolute-wrapper; rotate90" style="position: fixed; left:10%; top:40%">
-    <div class="hand-container">
+    <div id="bottom-hand" class="absolute-wrapper" style="position: fixed; left:40%; bottom:2%">
+        <div class="container">
+            <div class="hand-container">
+                <div class="card-container" v-for="kartya in sajat_kez">
+                    <div class="card"><img v-on:click="kihiv(kartya)" :src="`gfx/${kartya}.png`" width="90%;"></div>
+                </div>
+            </div>
+        </div>
+        <p style="alignment: center"><b>K</b>ristof</p>
+    </div>
+
+    <div id="right-hand" class="absolute-wrapper; rotate270" style="position: fixed; right:10%; top:40%">
         <div class="hand-container">
-            <div class="card-container" v-for="kartya in bal_kez"><div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div></div>
+            <div class="card-container" v-for="kartya in jobb_kez">
+                <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>
+            </div>
+        </div>
+        <p style="alignment: center"><b>V</b>incze<b>G</b></p>
+    </div>
+
+    <div id="desk" class="absolute-wrapper" style="position: fixed; left:50%; top:45%">
+        <div class="hand-container">
+            <div class="card-container" v-for="kartya in asztal">
+                <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>
+            </div>
         </div>
     </div>
-    <p align="center"><b>H</b>oba</p>
-</div>
 
-<div id="bottom-hand" class="absolute-wrapper" style="position: fixed; left:40%; bottom:2%">
     <div class="container">
-        <div class="hand-container">
-            <div class="card-container" v-for="kartya in sajat_kez"><div class="card"><img :src="`gfx/${kartya}.png`" width="90%;"></div></div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+            </div>
         </div>
     </div>
-    <p align="center"><b>K</b>ristof</p>
-</div>
-
-<div id="right-hand" class="absolute-wrapper; rotate270" style="position: fixed; right:10%; top:40%">
-    <div class="hand-container">
-        <div class="card-container" v-for="kartya in jobb_kez"><div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div></div>
-    </div>
-    <p align="center"><b>V</b>incze<b>G</b></p>
-</div>
-
-<div id="desk" class="absolute-wrapper" style="position: fixed; left:50%; top:45%">
-    <div class="hand-container">
-        <div class="card-container" v-for="kartya in asztal"><div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div></div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 text-center">
-        </div>
-    </div>
-</div>
 </div>
 
 <script src="vendor/jquery/jquery.slim.min.js"></script>
