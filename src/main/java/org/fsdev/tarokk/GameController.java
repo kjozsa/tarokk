@@ -4,6 +4,7 @@ import org.fsdev.tarokk.model.Asztal;
 import org.fsdev.tarokk.model.Jatekos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -37,11 +38,7 @@ public class GameController {
     }
 
     @MessageMapping("/kihiv")
-    public void kihiv(String kartya) {
-        logger.info("kihivott {}", kartya);
+    public void kihiv(String kartya, Message message) {
+        logger.info("kihivott {} {}", kartya, message.getHeaders().get("simpSessionId"));
     }
-
-
-
-
 }

@@ -20,7 +20,6 @@ const app = new Vue({
                 this.stompClient.subscribe('/game/asztal', function (val) {
                     console.log(val);
                     console.log(JSON.parse(val.body));
-                    vm.list1 = JSON.parse(val.body);
                 });
                 this.stompClient.subscribe('/game/tick', function (val) {
                     console.log(val);
