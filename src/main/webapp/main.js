@@ -1,8 +1,29 @@
 var app = new Vue({
     el: '#app',
+    mounted: function () {
+        this.$nextTick(function () {
+            let socket = new SockJS('/ws');
+            let stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                console.log('Connected: ' + frame);
+
+                stompClient.subscribe('/game/asztal', function (val) {
+                    console.log(val);
+                    console.log(JSON.parse(val.body));
+                    vm.list1 = JSON.parse(val.body);
+                });
+                stompClient.subscribe('/game/tick', function (val) {
+                    console.log(val);
+                });
+            });
+        });
+    },
     data: {
-        next_player: "Kristóf",
-        top_hand: [
+        kovetkezo: "Kristóf",
+        asztal: [
+            "kor04",
+        ],
+        felso_kez: [
             "tarokk01",
             "tarokk02",
             "tarokk03",
@@ -13,7 +34,7 @@ var app = new Vue({
             "tarokk08",
             "tarokk09",
         ],
-        left_hand: [
+        bal_kez: [
             "tarokk01",
             "tarokk02",
             "tarokk03",
@@ -24,7 +45,7 @@ var app = new Vue({
             "tarokk08",
             "tarokk09",
         ],
-        bottom_hand: [
+        sajat_kez: [
             "tarokk11",
             "tarokk12",
             "tarokk13",
@@ -35,7 +56,7 @@ var app = new Vue({
             "tarokk18",
             "tarokk21",
         ],
-        right_hand: [
+        jobb_kez: [
             "tarokk01",
             "tarokk02",
             "tarokk03",

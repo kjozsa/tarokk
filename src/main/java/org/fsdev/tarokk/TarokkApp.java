@@ -1,11 +1,13 @@
-package org.fsdev.tarokk.model;
+package org.fsdev.tarokk;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-public class SpringApp {
+@EnableScheduling
+public class TarokkApp {
     public static void main(String[] args) {
-        SpringApplication.run(SpringApp.class, args);
+        SpringApplication.run(TarokkApp.class, args);
     }
 }
