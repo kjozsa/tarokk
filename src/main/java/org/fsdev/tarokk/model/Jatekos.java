@@ -75,16 +75,16 @@ public class Jatekos {
         return lapok;
     }
 
+    public List<String> getLapKepek() {
+        return lapok.stream().map(Lap::getImage).collect(Collectors.toList());
+    }
+
     public SortedSet<Lap> getElvitt() {
         return elvitt;
     }
 
     public String getNev() {
         return nev;
-    }
-
-    public String getRovidNev() {
-        return nev.substring(0, 1);
     }
 
     public int elvittLapokErteke() {

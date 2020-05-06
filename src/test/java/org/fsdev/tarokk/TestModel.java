@@ -34,7 +34,9 @@ public class TestModel {
         Lap xxi = new Lap(TAROKK, XXI);
 
         System.out.println(pikkAsz);
+        System.out.println(pikkAsz.getImage());
         System.out.println(xxi);
+        System.out.println(xxi.getImage());
 
         assertTrue(xxi.elviszi(pikkAsz));
         assertFalse(pikkAsz.elviszi(xxi));

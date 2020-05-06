@@ -14,6 +14,11 @@ public class Lap implements Comparable<Lap> {
         return szin == Szin.TAROKK ? figura.name() : szin.name() + " " + figura.name();
     }
 
+    public String getImage() {
+        return (szin == Szin.TAROKK ? "tarokk" : szin.name().toLowerCase()) +
+                String.format("%02d", figura.getErosseg());
+    }
+
     @Override
     public int compareTo(Lap lap) {
         if (this.szin == lap.szin) {

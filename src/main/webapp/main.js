@@ -1,4 +1,5 @@
 let stompClient = null;
+let asztal = null
 
 const app = new Vue({
     el: '#app',
@@ -14,67 +15,25 @@ const app = new Vue({
         this.$nextTick(function () {
             let socket = new SockJS('/ws');
             stompClient = Stomp.over(socket);
-            stompClient.debug = function(str) {};
+            stompClient.debug = function (str) {
+            };
             stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
 
                 stompClient.subscribe('/game/asztal', function (message) {
                     console.log(JSON.parse(message.body));
+                    app.asztal = JSON.parse(message.body);
                 });
+
                 stompClient.subscribe('/game/log', function (message) {
                     console.log("LOG: " + message.body);
                 });
             });
         });
     },
-    data: {
-        kovetkezo: "Kristóf",
-        asztal: [
-            "kor04",
-        ],
-        felso_kez: [
-            "tarokk01",
-            "tarokk02",
-            "tarokk03",
-            "tarokk04",
-            "tarokk05",
-            "tarokk06",
-            "tarokk07",
-            "tarokk08",
-            "tarokk09",
-        ],
-        bal_kez: [
-            "tarokk01",
-            "tarokk02",
-            "tarokk03",
-            "tarokk04",
-            "tarokk05",
-            "tarokk06",
-            "tarokk07",
-            "tarokk08",
-            "tarokk09",
-        ],
-        sajat_kez: [
-            "tarokk11",
-            "tarokk12",
-            "tarokk13",
-            "tarokk14",
-            "tarokk15",
-            "tarokk16",
-            "tarokk17",
-            "tarokk18",
-            "tarokk21",
-        ],
-        jobb_kez: [
-            "tarokk01",
-            "tarokk02",
-            "tarokk03",
-            "tarokk04",
-            "tarokk05",
-            "tarokk06",
-            "tarokk07",
-            "tarokk08",
-            "tarokk09",
-        ]
+    data: function () {
+        return {
+            asztal: {}
+        }
     }
 });

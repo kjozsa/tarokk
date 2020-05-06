@@ -49,4 +49,11 @@ public class LoginController {
         SecurityContextHolder.getContext().setAuthentication(null);
         return "bye";
     }
+
+    @GetMapping("/reset")
+    public String reset() {
+        gameController.getJatekosok().clear();
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "reset done";
+    }
 }
