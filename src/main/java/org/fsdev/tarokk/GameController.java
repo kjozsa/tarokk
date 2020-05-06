@@ -46,9 +46,8 @@ public class GameController {
 
     @MessageMapping("/kihiv")
     public void kihiv(String kartya, Principal principal) {
-        gameLogger.log("kihivott %s %s", kartya, principal);
+        gameLogger.log("%s kihivott %s", principal.getName(), kartya);
     }
-
 
     public void leul(Jatekos jatekos) {
         gameLogger.log("%s leult az asztalhoz", jatekos);

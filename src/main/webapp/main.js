@@ -5,9 +5,9 @@ const app = new Vue({
     el: '#app',
     methods: {
         kihiv: function (kartya) {
-            if (this.stompClient && this.stompClient.connected) {
+            if (stompClient && stompClient.connected) {
                 console.log("sending " + JSON.stringify(kartya));
-                this.stompClient.send("/app/kihiv", {}, JSON.stringify(kartya));
+                stompClient.send("/app/kihiv", {}, JSON.stringify(kartya));
             }
         }
     },

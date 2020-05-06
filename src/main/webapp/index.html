@@ -41,7 +41,7 @@
     </nav>
 
     <div id="top-hand" class="absolute-wrapper" style="position: fixed; left:40%; top:8%" v-if="asztal.jatekosok">
-        <p style="alignment: center" style="margin-bottom: 0px"><b>A</b>ttila</p>
+        <p style="alignment: center" style="margin-bottom: 0px">{{ asztal.jatekosok[2].nev }}</p>
         <div class="container">
             <div class="hand-container">
                 <div class="card-container" v-for="kartya in asztal.jatekosok[2].lapKepek">
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <p style="alignment: center"><b>H</b>oba</p>
+        <p style="alignment: center">{{ asztal.jatekosok[3].nev }}</p>
     </div>
 
     <div id="bottom-hand" class="absolute-wrapper" style="position: fixed; left:40%; bottom:2%" v-if="asztal.jatekosok">
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <p style="alignment: center"><b>K</b>ristof</p>
+        <p style="alignment: center">{{ asztal.jatekosok[0].nev }}</p>
     </div>
 
     <div id="right-hand" class="absolute-wrapper; rotate270" style="position: fixed; right:10%; top:40%" v-if="asztal.jatekosok">
@@ -79,16 +79,16 @@
                 <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>
             </div>
         </div>
-        <p style="alignment: center"><b>V</b>incze<b>G</b></p>
+        <p style="alignment: center">{{ asztal.jatekosok[1].nev }}</p>
     </div>
 
-    <div id="desk" class="absolute-wrapper" style="position: fixed; left:50%; top:45%">
-        <div class="hand-container">
-            <div class="card-container" v-for="kartya in asztal">
-                <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>
-            </div>
-        </div>
-    </div>
+<!--    <div id="desk" class="absolute-wrapper" style="position: fixed; left:50%; top:45%">-->
+<!--        <div class="hand-container">-->
+<!--            <div class="card-container" v-for="kartya in asztal">-->
+<!--                <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="container">
         <div class="row">
