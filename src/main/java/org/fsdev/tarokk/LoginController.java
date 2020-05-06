@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 public class LoginController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -38,5 +40,13 @@ public class LoginController {
 
         gameController.leul(jatekos);
         return "hello " + username;
+    }
+
+    @GetMapping("/logout")
+    public String logout(Principal principal) {
+        logger.info("logout {}", principal);
+        gameController.felall(new Jatekos(principal.getName()));
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "bye";
     }
 }

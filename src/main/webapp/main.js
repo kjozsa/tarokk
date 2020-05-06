@@ -13,16 +13,15 @@ const app = new Vue({
     mounted: function () {
         this.$nextTick(function () {
             let socket = new SockJS('/ws');
-            this.stompClient = Stomp.over(socket);
-            this.stompClient.connect({}, function (frame) {
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
 
-                this.stompClient.subscribe('/game/asztal', function (val) {
-                    console.log(val);
-                    console.log(JSON.parse(val.body));
+                stompClient.subscribe('/game/asztal', function (message) {
+                    console.log(JSON.parse(message.body));
                 });
-                this.stompClient.subscribe('/game/tick', function (val) {
-                    console.log(val);
+                stompClient.subscribe('/game/log', function (message) {
+                    console.log("LOG: " + message.body);
                 });
             });
         });
