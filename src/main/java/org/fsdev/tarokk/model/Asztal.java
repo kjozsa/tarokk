@@ -37,14 +37,6 @@ public class Asztal {
         }
     }
 
-    public Pakli getPakli() {
-        return pakli;
-    }
-
-    public Lap getHivottLap() {
-        return hivottLap;
-    }
-
     /**
      * @return kovetkezo Jatekos
      */
@@ -71,5 +63,17 @@ public class Asztal {
             int index = jatekosok.indexOf(jatekos);
             return index + 1 < jatekosok.size() ? jatekosok.get(index + 1) : jatekosok.get(0);
         }
+    }
+
+    public Pakli getPakli() {
+        return pakli;
+    }
+
+    public Lap getHivottLap() {
+        return hivottLap;
+    }
+
+    public List<Jatekos> getJatekosok() {
+        return jatekosok;
     }
 }
