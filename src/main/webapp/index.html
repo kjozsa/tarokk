@@ -44,7 +44,7 @@
         <p style="alignment: center" style="margin-bottom: 0px"><b>A</b>ttila</p>
         <div class="container">
             <div class="hand-container">
-                <div class="card-container" v-for="kartya in asztal.jatekosok[0].lapok">
+                <div class="card-container" v-for="kartya in asztal.jatekosok[2].lapKepek">
                     <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
     <div id="left-hand" class="absolute-wrapper; rotate90" style="position: fixed; left:10%; top:40%" v-if="asztal.jatekosok">
         <div class="hand-container">
             <div class="hand-container">
-                <div class="card-container" v-for="kartya in bal_kez">
+                <div class="card-container" v-for="kartya in asztal.jatekosok[3].lapKepek">
                     <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
     <div id="bottom-hand" class="absolute-wrapper" style="position: fixed; left:40%; bottom:2%" v-if="asztal.jatekosok">
         <div class="container">
             <div class="hand-container">
-                <div class="card-container" v-for="kartya in sajat_kez">
+                <div class="card-container" v-for="kartya in asztal.jatekosok[0].lapKepek">
                     <div class="card"><img v-on:click="kihiv(kartya)" :src="`gfx/${kartya}.png`" width="90%;"></div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
 
     <div id="right-hand" class="absolute-wrapper; rotate270" style="position: fixed; right:10%; top:40%" v-if="asztal.jatekosok">
         <div class="hand-container">
-            <div class="card-container" v-for="kartya in jobb_kez">
+            <div class="card-container" v-for="kartya in asztal.jatekosok[1].lapKepek">
                 <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>
             </div>
         </div>

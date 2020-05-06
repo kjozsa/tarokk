@@ -37,13 +37,11 @@ public class GameController {
         asztal.ujOsztas();
 
         gameLogger.log("uj jatek kezdodik");
-        broker.convertAndSend("/game/asztal", asztal);
+        sendAsztal();
     }
 
-    @MessageMapping("/asztal")
-    @SendTo("/game/asztal")
-    public Asztal asztal() {
-        return asztal;
+    public void sendAsztal() {
+        broker.convertAndSend("/game/asztal", asztal);
     }
 
     @MessageMapping("/kihiv")

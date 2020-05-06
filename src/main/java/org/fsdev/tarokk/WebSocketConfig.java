@@ -24,6 +24,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Autowired
     private SimpMessagingTemplate messageTemplate;
 
+    @Autowired
+    private GameController gameController;
+
 //    @Scheduled(fixedDelay = 5000)
 //    public void tick() {
 //        String tick = "tick " + new Date();
@@ -50,6 +53,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                     @Override
                     public void afterHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Exception e) {
                         logger.info("client connected from {}", serverHttpRequest.getRemoteAddress());
+                        gameController.sendAsztal();
                     }
                 })
                 .withSockJS();
