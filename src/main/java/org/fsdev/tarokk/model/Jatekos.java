@@ -1,7 +1,10 @@
 package org.fsdev.tarokk.model;
 
+import org.springframework.util.StringUtils;
+
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -12,13 +15,26 @@ public class Jatekos {
     private SortedSet<Lap> elvitt = new TreeSet<>();
 
 
+    public Jatekos(String nev) {
+        this.nev = StringUtils.capitalize(nev);
+    }
+
     @Override
     public String toString() {
         return nev;
     }
 
-    public Jatekos(String nev) {
-        this.nev = nev;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Jatekos jatekos = (Jatekos) o;
+        return nev.equals(jatekos.nev);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nev);
     }
 
     public void kap(Lap lap) {

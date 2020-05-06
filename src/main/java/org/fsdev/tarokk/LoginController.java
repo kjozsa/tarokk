@@ -1,5 +1,6 @@
 package org.fsdev.tarokk;
 
+import org.fsdev.tarokk.model.Jatekos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,15 @@ public class LoginController {
         logger.info("login attempt for {}", username);
         UserDetails userDetails = manager.loadUserByUsername(username);
 
-        if (userDetails == null) {
-            return "no";
+        Jatekos jatekos = new Jatekos(username);
+        if (gameController.getJatekosok().contains(jatekos)) {
+            return "mar itt vagy " + jatekos;
         }
 
         Authentication auth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        gameController.leul(username);
+        gameController.leul(jatekos);
         return "hello " + username;
     }
 }

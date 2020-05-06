@@ -42,13 +42,17 @@ public class GameController {
         logger.info("kihivott {} {}", kartya, principal);
     }
 
-    
-    public void leul(String username) {
-        logger.info("{} leult az asztalhoz", username);
-        jatekosok.add(new Jatekos(username));
+
+    public void leul(Jatekos jatekos) {
+        logger.info("{} leult az asztalhoz", jatekos);
+        jatekosok.add(jatekos);
 
         if (jatekosok.size() == 4) {
             ujJatek();
         }
+    }
+
+    public List<Jatekos> getJatekosok() {
+        return jatekosok;
     }
 }
