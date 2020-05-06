@@ -14,6 +14,7 @@ const app = new Vue({
         this.$nextTick(function () {
             let socket = new SockJS('/ws');
             stompClient = Stomp.over(socket);
+            stompClient.debug = function(str) {};
             stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
 

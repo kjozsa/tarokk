@@ -1,6 +1,7 @@
 package org.fsdev.tarokk;
 
 import org.fsdev.tarokk.model.Asztal;
+import org.fsdev.tarokk.model.GameLogger;
 import org.fsdev.tarokk.model.Jatekos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,9 @@ public class GameController {
     @Autowired
     private SimpMessagingTemplate broker;
 
+    @Autowired
+    private GameLogger gameLogger;
+
     List<Jatekos> jatekosok = new ArrayList<>();
     private Asztal asztal;
 
@@ -32,7 +36,7 @@ public class GameController {
         asztal = new Asztal(jatekosok);
         asztal.ujOsztas();
 
-        gameLog("uj jatek kezdodik");
+        gameLogger.log("uj jatek kezdodik");
         broker.convertAndSend("/game/asztal", asztal);
     }
 
@@ -44,12 +48,12 @@ public class GameController {
 
     @MessageMapping("/kihiv")
     public void kihiv(String kartya, Principal principal) {
-        gameLog("kihivott %s %s", kartya, principal);
+        gameLogger.log("kihivott %s %s", kartya, principal);
     }
 
 
     public void leul(Jatekos jatekos) {
-        gameLog("%s leult az asztalhoz", jatekos);
+        gameLogger.log("%s leult az asztalhoz", jatekos);
         jatekosok.add(jatekos);
 
         if (jatekosok.size() == 4) {
@@ -58,17 +62,11 @@ public class GameController {
     }
 
     public void felall(Jatekos jatekos) {
-        gameLog("%s felallt az asztaltol", jatekos);
+        gameLogger.log("%s felallt az asztaltol", jatekos);
         jatekosok.remove(jatekos);
     }
 
     public List<Jatekos> getJatekosok() {
         return jatekosok;
-    }
-
-    public void gameLog(String message, Object... params) {
-        String log = String.format(message, params);
-        logger.info("LOG: " + log);
-        broker.convertAndSend("/game/log", log);
     }
 }
