@@ -3,7 +3,6 @@ package org.fsdev.tarokk.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Set;
 
 public enum Figura {
     Asz(1, 1),
