@@ -1,8 +1,12 @@
 package org.fsdev.tarokk.model;
 
 public class Lap implements Comparable<Lap> {
-    public final Szin szin;
-    public final Figura figura;
+    public Szin szin;
+    public Figura figura;
+
+    private Lap() {
+        // for json deserialization
+    }
 
     public Lap(Szin szin, Figura figura) {
         this.szin = szin;

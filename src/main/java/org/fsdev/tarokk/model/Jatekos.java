@@ -75,10 +75,6 @@ public class Jatekos {
         return lapok;
     }
 
-    public List<String> getLapKepek() {
-        return lapok.stream().map(Lap::getImage).collect(Collectors.toList());
-    }
-
     public SortedSet<Lap> getElvitt() {
         return elvitt;
     }

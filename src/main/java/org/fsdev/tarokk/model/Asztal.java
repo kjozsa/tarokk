@@ -14,6 +14,7 @@ public class Asztal {
     List<Lap> utes = new ArrayList<>();
     Lap hivottLap;
     Jatekos utestViszi;
+    Jatekos kovetkezo;
 
     public Asztal(List<Jatekos> jatekosok) {
         this.jatekosok = jatekosok;
@@ -29,6 +30,7 @@ public class Asztal {
                 jatekos.kap(pakli.getLapok().remove(0));
             }
         }
+        kovetkezo = jatekosok.get(0);
     }
 
     public void logLapokKezben() {
@@ -58,10 +60,12 @@ public class Asztal {
             logger.info("utest vitte {} ({})", utestViszi.getNev(), utes);
             utestViszi.elvisz(utes);
             utes.clear();
+            kovetkezo = utestViszi;
             return utestViszi;
         } else {
             int index = jatekosok.indexOf(jatekos);
-            return index + 1 < jatekosok.size() ? jatekosok.get(index + 1) : jatekosok.get(0);
+            kovetkezo = index + 1 < jatekosok.size() ? jatekosok.get(index + 1) : jatekosok.get(0);
+            return kovetkezo;
         }
     }
 
@@ -75,5 +79,9 @@ public class Asztal {
 
     public List<Jatekos> getJatekosok() {
         return jatekosok;
+    }
+
+    public Jatekos getKovetkezo() {
+        return kovetkezo;
     }
 }

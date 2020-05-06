@@ -3,6 +3,7 @@ package org.fsdev.tarokk;
 import org.fsdev.tarokk.model.Asztal;
 import org.fsdev.tarokk.model.GameLogger;
 import org.fsdev.tarokk.model.Jatekos;
+import org.fsdev.tarokk.model.Lap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,8 @@ public class GameController {
     }
 
     @MessageMapping("/kihiv")
-    public void kihiv(String kartya, Principal principal) {
-        gameLogger.log("%s kihivott %s", principal.getName(), kartya);
+    public void kihiv(Lap lap, Principal principal) {
+        gameLogger.log("%s kihivott %s", principal.getName(), lap);
     }
 
     public void leul(Jatekos jatekos) {
