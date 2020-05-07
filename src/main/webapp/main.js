@@ -28,6 +28,8 @@ const app = new Vue({
                 stompClient.subscribe('/game/log', function (message) {
                     console.log("LOG: " + message.body);
                 });
+
+                stompClient.send("/app/asztal", {});
             });
         });
     },

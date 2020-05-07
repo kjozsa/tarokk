@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
@@ -38,10 +37,12 @@ public class GameController {
         asztal.ujOsztas();
 
         gameLogger.log("uj jatek kezdodik");
-        sendAsztal();
+        broadcastAsztal();
     }
 
-    public void sendAsztal() {
+    @MessageMapping("/asztal")
+    public void broadcastAsztal() {
+        logger.info("## broadcasting asztal");
         broker.convertAndSend("/game/asztal", asztal);
     }
 
@@ -64,7 +65,12 @@ public class GameController {
         jatekosok.remove(jatekos);
     }
 
+
     public List<Jatekos> getJatekosok() {
         return jatekosok;
+    }
+
+    public Asztal getAsztal() {
+        return asztal;
     }
 }
