@@ -5,7 +5,7 @@ const app = new Vue({
     el: '#app',
     methods: {
         kihiv: function (kartya) {
-            if (app.asztal.kovetkezo.nev == app.asztal.jatekosok[0].nev) {
+            if (app.asztal.kovetkezo.nev === app.asztal.jatekosok[0].nev) {
                 if (stompClient && stompClient.connected) {
                     console.log("sending " + JSON.stringify(kartya));
                     stompClient.send("/app/kihiv", {}, JSON.stringify(kartya));
