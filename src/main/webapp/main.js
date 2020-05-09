@@ -1,11 +1,14 @@
 let stompClient = null;
-let asztal = null
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1)
+}
 
 const app = new Vue({
     el: '#app',
     methods: {
         kihiv: function (kartya) {
-            if (app.asztal.kovetkezo.nev === app.asztal.jatekosok[0].nev) {
+            if (app.asztal.kovetkezo.nev === app.whoami) {
                 if (stompClient && stompClient.connected) {
                     console.log("sending " + JSON.stringify(kartya));
                     stompClient.send("/app/kihiv", {}, JSON.stringify(kartya));
@@ -20,7 +23,7 @@ const app = new Vue({
             stompClient.debug = function (str) {};
             stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
-                app.whoami = frame.headers['user-name']
+                app.whoami = frame.headers['user-name'].capitalize()
 
                 stompClient.subscribe('/game/asztal', function (message) {
                     console.log(JSON.parse(message.body));
