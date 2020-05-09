@@ -49,6 +49,8 @@ public class GameController {
     @MessageMapping("/kihiv")
     public void kihiv(Lap lap, Principal principal) {
         gameLogger.log("%s kihivott %s", principal.getName(), lap);
+        asztal.rak(principal.getName(), lap);
+        broadcastAsztal();
     }
 
     public void leul(Jatekos jatekos) {

@@ -39,6 +39,10 @@ public class Asztal {
         }
     }
 
+    public Jatekos rak(String nev, Lap lap) {
+        return rak(findJatekosByNev(nev), lap);
+    }
+
     /**
      * @return kovetkezo Jatekos
      */
@@ -83,5 +87,9 @@ public class Asztal {
 
     public Jatekos getKovetkezo() {
         return kovetkezo;
+    }
+
+    public Jatekos findJatekosByNev(String nev) {
+        return jatekosok.stream().filter(it -> nev.equalsIgnoreCase(it.getNev())).findFirst().get();
     }
 }
