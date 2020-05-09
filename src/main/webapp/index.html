@@ -82,13 +82,13 @@
         <p style="alignment: center">{{ asztal.jatekosok[1].nev }}</p>
     </div>
 
-<!--    <div id="desk" class="absolute-wrapper" style="position: fixed; left:50%; top:45%">-->
-<!--        <div class="hand-container">-->
-<!--            <div class="card-container" v-for="kartya in asztal">-->
-<!--                <div class="card"><img :src="`gfx/${kartya}.png`" width="75%;"></div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div id="desk" class="absolute-wrapper" style="position: fixed; left:50%; top:45%">
+        <div class="hand-container" style="width: 50px;">
+            <div class="card-container" v-for="kartya in asztal.utes">
+                <div class="card"><img :src="`gfx/${kartya.image}.png`" width="75%;"></div>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="row">

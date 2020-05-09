@@ -5,9 +5,11 @@ const app = new Vue({
     el: '#app',
     methods: {
         kihiv: function (kartya) {
-            if (stompClient && stompClient.connected) {
-                console.log("sending " + JSON.stringify(kartya));
-                stompClient.send("/app/kihiv", {}, JSON.stringify(kartya));
+            if (app.asztal.kovetkezo.nev == app.asztal.jatekosok[0].nev) {
+                if (stompClient && stompClient.connected) {
+                    console.log("sending " + JSON.stringify(kartya));
+                    stompClient.send("/app/kihiv", {}, JSON.stringify(kartya));
+                }
             }
         }
     },
@@ -15,10 +17,10 @@ const app = new Vue({
         this.$nextTick(function () {
             let socket = new SockJS('/ws');
             stompClient = Stomp.over(socket);
-            stompClient.debug = function (str) {
-            };
+            stompClient.debug = function (str) {};
             stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
+                app.whoami = frame.headers['user-name']
 
                 stompClient.subscribe('/game/asztal', function (message) {
                     console.log(JSON.parse(message.body));
@@ -30,12 +32,15 @@ const app = new Vue({
                 });
 
                 stompClient.send("/app/asztal", {});
+
+
             });
         });
     },
     data: function () {
         return {
-            asztal: {}
+            asztal: {},
+            whoami: ""
         }
     }
 });

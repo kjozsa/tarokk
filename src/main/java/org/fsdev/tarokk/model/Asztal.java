@@ -89,6 +89,10 @@ public class Asztal {
         return kovetkezo;
     }
 
+    public List<Lap> getUtes() {
+        return utes;
+    }
+
     public Jatekos findJatekosByNev(String nev) {
         return jatekosok.stream().filter(it -> nev.equalsIgnoreCase(it.getNev())).findFirst().get();
     }
