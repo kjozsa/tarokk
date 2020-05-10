@@ -14,7 +14,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div class="container">
-            <a v-if="asztal.jatekosok" class="navbar-brand" href="#"><b>{{asztal.kovetkezo.nev}}</b> következik</a>
+            <a v-if="asztal.kovetkezo" class="navbar-brand" href="#"><b>{{asztal.kovetkezo.nev}}</b> következik</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,46 +40,46 @@
         </div>
     </nav>
 
-    <div id="top-hand" class="absolute-wrapper" style="position: fixed; left:40%; top:8%" v-if="asztal.jatekosok">
-        <p style="alignment: center" style="margin-bottom: 0px">{{ asztal.jatekosok[2].nev }}</p>
+    <div id="top-hand" class="absolute-wrapper" style="position: fixed; left:40%; top:8%" v-if="tobbiek">
+        <p style="alignment: center" style="margin-bottom: 0px">{{ tobbiek[1].nev }}</p>
         <div class="container">
             <div class="hand-container">
-                <div class="card-container" v-for="kartya in asztal.jatekosok[2].lapok">
+                <div class="card-container" v-for="kartya in tobbiek[1].lapok">
                     <div class="card"><img :src="`gfx/${kartya.image}.png`" width="75%;"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="left-hand" class="absolute-wrapper; rotate90" style="position: fixed; left:10%; top:40%" v-if="asztal.jatekosok">
+    <div id="left-hand" class="absolute-wrapper; rotate90" style="position: fixed; left:10%; top:40%" v-if="tobbiek">
         <div class="hand-container">
             <div class="hand-container">
-                <div class="card-container" v-for="kartya in asztal.jatekosok[3].lapok">
+                <div class="card-container" v-for="kartya in tobbiek[2].lapok">
                     <div class="card"><img :src="`gfx/${kartya.image}.png`" width="75%;"></div>
                 </div>
             </div>
         </div>
-        <p style="alignment: center">{{ asztal.jatekosok[3].nev }}</p>
+        <p style="alignment: center">{{ tobbiek[2].nev }}</p>
     </div>
 
-    <div id="bottom-hand" class="absolute-wrapper" style="position: fixed; left:40%; bottom:2%" v-if="asztal.jatekosok">
+    <div id="bottom-hand" class="absolute-wrapper" style="position: fixed; left:40%; bottom:2%" v-if="sajatLapok">
         <div class="container">
             <div class="hand-container">
-                <div class="card-container" v-for="kartya in asztal.jatekosok[0].lapok">
+                <div class="card-container" v-for="kartya in sajatLapok">
                     <div class="card"><img v-on:click="kihiv(kartya)" :src="`gfx/${kartya.image}.png`" width="90%;"></div>
                 </div>
             </div>
         </div>
-        <p style="alignment: center">{{ asztal.jatekosok[0].nev }}</p>
+        <p style="alignment: center">{{ whoami }}</p>
     </div>
 
-    <div id="right-hand" class="absolute-wrapper; rotate270" style="position: fixed; right:10%; top:40%" v-if="asztal.jatekosok">
+    <div id="right-hand" class="absolute-wrapper; rotate270" style="position: fixed; right:10%; top:40%" v-if="tobbiek">
         <div class="hand-container">
-            <div class="card-container" v-for="kartya in asztal.jatekosok[1].lapok">
+            <div class="card-container" v-for="kartya in tobbiek[0].lapok">
                 <div class="card"><img :src="`gfx/${kartya.image}.png`" width="75%;"></div>
             </div>
         </div>
-        <p style="alignment: center">{{ asztal.jatekosok[1].nev }}</p>
+        <p style="alignment: center">{{ tobbiek[0].nev }}</p>
     </div>
 
     <div id="desk" class="absolute-wrapper" style="position: fixed; left:50%; top:45%">

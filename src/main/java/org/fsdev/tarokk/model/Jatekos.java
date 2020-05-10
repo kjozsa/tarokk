@@ -2,6 +2,7 @@ package org.fsdev.tarokk.model;
 
 import org.springframework.util.StringUtils;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class Jatekos {
+public class Jatekos implements Principal {
     private String nev;
     private SortedSet<Lap> lapok = new TreeSet<>();
     private SortedSet<Lap> elvitt = new TreeSet<>();
@@ -24,6 +25,13 @@ public class Jatekos {
         return nev;
     }
 
+    public Jatekos copy() {
+        Jatekos other = new Jatekos(this.nev);
+        lapok.forEach(lap -> other.lapok.add(lap.copy()));
+        elvitt.forEach(lap -> other.elvitt.add(lap.copy()));
+        return other;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,6 +43,11 @@ public class Jatekos {
     @Override
     public int hashCode() {
         return Objects.hash(nev);
+    }
+
+    @Override
+    public String getName() {
+        return nev;
     }
 
     public void kap(Lap lap) {
@@ -85,5 +98,13 @@ public class Jatekos {
 
     public int elvittLapokErteke() {
         return elvitt.stream().mapToInt(lap -> lap.figura.getPontertek()).sum();
+    }
+
+    private void setLapok(SortedSet<Lap> lapok) {
+        this.lapok = lapok;
+    }
+
+    private void setElvitt(SortedSet<Lap> elvitt) {
+        this.elvitt = elvitt;
     }
 }

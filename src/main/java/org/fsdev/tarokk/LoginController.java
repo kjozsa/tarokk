@@ -27,19 +27,20 @@ public class LoginController {
 
     @GetMapping("/login/{username}")
     public String login(@PathVariable String username) {
-        logger.info("login attempt for {}", username);
+        logger.debug("login attempt for {}", username);
         UserDetails userDetails = manager.loadUserByUsername(username);
 
         Jatekos jatekos = new Jatekos(username);
         if (gameController.getJatekosok().contains(jatekos)) {
+            logger.debug("already logged in {}", jatekos);
             return "mar itt vagy " + jatekos;
+
+        } else {
+            Authentication auth = new UsernamePasswordAuthenticationToken(jatekos, userDetails.getPassword(), userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            logger.debug("logged in {}", jatekos);
+            return "hello " + username;
         }
-
-        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
-        gameController.leul(jatekos);
-        return "hello " + username;
     }
 
     @GetMapping("/logout")

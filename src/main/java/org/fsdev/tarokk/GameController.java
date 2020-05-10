@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -42,16 +41,31 @@ public class GameController {
     }
 
     @MessageMapping("/asztal")
+    public void asztal(Principal principal) {
+        if (asztal != null) {
+            Jatekos jatekos = (Jatekos) principal;
+            logger.info("@@ sending asztal to {}", jatekos);
+            broker.convertAndSendToUser(jatekos.getName(), "/game/asztal", asztal);
+            broker.convertAndSendToUser(jatekos.getName(), "/game/sajatLapok", new ArrayList<>(asztal.getLapok(jatekos)));
+            broker.convertAndSendToUser(jatekos.getName(), "/game/tobbiek", asztal.getTobbiek(jatekos));
+        }
+    }
+
     public void broadcastAsztal() {
         logger.info("## broadcasting asztal");
-        broker.convertAndSend("/game/asztal", asztal);
+        jatekosok.forEach(this::asztal);
     }
 
     @MessageMapping("/kihiv")
     public void kihiv(Lap lap, Principal principal) {
-        gameLogger.log("%s kihivott %s", principal.getName(), lap);
-        asztal.rak(principal.getName(), lap);
-        broadcastAsztal();
+        Jatekos jatekos = (Jatekos) principal;
+        if (!asztal.szabalyosHivas(lap)) {
+            logger.warn("{} nem ervenyes lapot probal hivni: {}", jatekos, lap);
+        } else {
+            gameLogger.log("%s kihivott %s", principal.getName(), lap);
+            asztal.rak(jatekos, lap);
+            broadcastAsztal();
+        }
     }
 
     public void leul(Jatekos jatekos) {

@@ -1,8 +1,9 @@
 package org.fsdev.tarokk.model;
 
 public class Lap implements Comparable<Lap> {
-    public Szin szin;
-    public Figura figura;
+    Szin szin;
+    Figura figura;
+    boolean rejtett;
 
     private Lap() {
         // for json deserialization
@@ -15,12 +16,24 @@ public class Lap implements Comparable<Lap> {
 
     @Override
     public String toString() {
-        return szin == Szin.TAROKK ? figura.name() : szin.name() + " " + figura.name();
+        return (rejtett ? " Rejtett " : "") + (szin == Szin.TAROKK ? figura.name() : szin.name() + " " + figura.name());
     }
 
     public String getImage() {
-        return (szin == Szin.TAROKK ? "tarokk" : szin.name().toLowerCase()) +
-                String.format("%02d", figura.getErosseg());
+        if (rejtett) {
+            return "hatlap";
+        } else {
+            return (szin == Szin.TAROKK ? "tarokk" : szin.name().toLowerCase()) +
+                    String.format("%02d", figura.getErosseg());
+        }
+    }
+
+    public Szin getSzin() {
+        return rejtett ? null : szin;
+    }
+
+    public Figura getFigura() {
+        return rejtett ? null : figura;
     }
 
     @Override
@@ -38,5 +51,13 @@ public class Lap implements Comparable<Lap> {
         }
 
         return (szin == Szin.TAROKK);
+    }
+
+    public void setRejtett(boolean rejtett) {
+        this.rejtett = rejtett;
+    }
+
+    public Lap copy() {
+        return new Lap(szin, figura);
     }
 }

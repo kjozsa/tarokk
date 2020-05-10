@@ -3,6 +3,7 @@ package org.fsdev.tarokk.model;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Asztal {
@@ -37,10 +38,6 @@ public class Asztal {
         for (Jatekos jatekos : jatekosok) {
             logger.info("{}: {}", jatekos, jatekos.getLapok());
         }
-    }
-
-    public Jatekos rak(String nev, Lap lap) {
-        return rak(findJatekosByNev(nev), lap);
     }
 
     /**
@@ -81,9 +78,9 @@ public class Asztal {
         return hivottLap;
     }
 
-    public List<Jatekos> getJatekosok() {
-        return jatekosok;
-    }
+//    public List<Jatekos> getJatekosok() {
+//        return jatekosok;
+//    }
 
     public Jatekos getKovetkezo() {
         return kovetkezo;
@@ -93,7 +90,33 @@ public class Asztal {
         return utes;
     }
 
-    public Jatekos findJatekosByNev(String nev) {
-        return jatekosok.stream().filter(it -> nev.equalsIgnoreCase(it.getNev())).findFirst().get();
+    public Collection<Lap> getLapok(Jatekos jatekos) {
+        return jatekosok.stream().filter(it -> jatekos.equals(it)).findFirst().get().getLapok();
+    }
+
+    public List<Jatekos> getTobbiek(Jatekos jatekos) {
+        ArrayList<Jatekos> results = new ArrayList<>();
+        int aktualisPozicio = 0;
+        for (int i = 0; i <= 3; i++) {
+            if (jatekosok.get(i).equals(jatekos)) {
+                aktualisPozicio = i;
+            }
+        }
+
+        for (int i = 1; i <= 3; i++) {
+            int pozicio = aktualisPozicio + i;
+            int korrigaltPozicio = pozicio > 3 ? pozicio - 4 : pozicio;
+
+            Jatekos copy = jatekosok.get(korrigaltPozicio).copy();
+            copy.getLapok().forEach(lap -> lap.setRejtett(true));
+            results.add(copy);
+        }
+        return results;
+    }
+
+    public boolean szabalyosHivas(Lap lap) {
+        if (hivottLap == null) return true;
+        Szin szin = lap.szin;
+        return szin.equals(hivottLap.szin) || szin.equals(Szin.TAROKK);
     }
 }

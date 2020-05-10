@@ -1,4 +1,4 @@
-package org.fsdev.tarokk;
+package org.fsdev.tarokk.model;
 
 import org.fsdev.tarokk.model.Asztal;
 import org.fsdev.tarokk.model.Jatekos;
@@ -69,7 +69,7 @@ public class TestModel {
         Jatekos vinczeg = new Jatekos("Vinczeg");
         Jatekos attila = new Jatekos("Attila");
 
-        List<Jatekos> jatekosok = Arrays.asList(kristof, hoba, vinczeg, attila);
+        List<Jatekos> jatekosok = Arrays.asList(attila, hoba, kristof, vinczeg);
         Asztal asztal = new Asztal(jatekosok);
         asztal.ujOsztas();
 
@@ -88,6 +88,9 @@ public class TestModel {
                 Lap lap = kirakhatoLapok.get(0);
 
                 aktualisJatekos = asztal.rak(aktualisJatekos, lap);
+
+                System.err.println("K lapjai: " + asztal.getLapok(kristof));
+                System.err.println("Tobbiek: " + asztal.getTobbiek(kristof));
             }
         }
 
